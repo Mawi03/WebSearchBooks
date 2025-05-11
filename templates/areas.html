@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Areas - UNISON{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Areas de Conocimiento</h1>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for area in areas %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ area }}</h5>
+                        <a href="{{ url_for('area_detalle', area=area) }}" class="btn btn-sonora">Ver Revistas</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

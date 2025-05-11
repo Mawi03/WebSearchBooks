@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}UNISON{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12 text-center mb-5">
+    <h1>Biblioteca de Articulos</h1>
+    <p class="lead">Universidad de Sonora</p>
+  </div>
+</div>
+
+{# Segundo nivel: dos #}
+<div class="row justify-content-center mb-4">
+  <div class="col-md-4">
+    <div class="card h-100 text-center">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Explorar las areas</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Navega por las diferentes areas para encontrar articulos</p>
+        <a href="{{ url_for('areas') }}" class="btn btn-sonora">Ver areas</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 text-center">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Explorar por catalogos</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text">Encuentra revistas indexadas en diferentes catalogos</p>
+        <a href="{{ url_for('catalogos') }}" class="btn btn-sonora">Ver catalogos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{# Seccion informativa #}
+<div class="row mt-4">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Plataforma de Analisis Academico</h5>
+      </div>
+      <div class="card-body">
+        <p>Esta solucion tecnologica permite investigar y localizar informacion dentro de registros de publicaciones cientificas, usando datos del ranking SCImago (SJR).</p>
+        <ul>
+          <li>Explorar por campos de estudio</li>
+          <li>Filtros segun bases de datos reconocidas</li>
+          <li>Busqueda alfabetica</li>
+          <li>Desglose completo de cada publicacion</li>
+          <li>Mediciones academicas (Indice H, relevancia citacional)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Creditos - UNISON{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Créditos</h1>
+        
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card h-100 credit-card">
+                    <div class="card-body text-center">
+                        <!-- <img src="{{ url_for('static', filename='img/moises.jpg') }}" 
+                             alt="Moises Perez Aello" 
+                             class="rounded-circle mb-3" 
+                             style="width: 150px; height: 150px; object-fit: cover;"> -->
+                        <h5 class="card-title">Moises Perez Aello</h5>
+                        <p class="card-text">Estudiante de Ingeniería en Sistemas de Información</p>
+                        <p class="card-text"><small class="text-muted">Universidad de Sonora</small></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="card h-100 credit-card">
+                    <div class="card-body text-center">
+                        <!-- <img src="{{ url_for('static', filename='img/itzel.jpg') }}" 
+                             alt="Itzel Alejandra Monroy Alvarez" 
+                             class="rounded-circle mb-3" 
+                             style="width: 150px; height: 150px; object-fit: cover;"> -->
+                        <h5 class="card-title">Itzel Alejandra Monroy Alvarez</h5>
+                        <p class="card-text">Estudiante de Ingeniería en Sistemas de Información</p>
+                        <p class="card-text"><small class="text-muted">Universidad de Sonora</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title">Acerca del Proyecto</h5>
+                <p>Este sistema fue desarrollado como proyecto final utilizando las siguientes tecnologías:</p>
+                <ul>
+                    <li>Python con Flask para el backend</li>
+                    <li>Bootstrap 5 para el diseño responsivo</li>
+                    <li>DataTables para tablas interactivas</li>
+                    <li>Beautiful Soup para web scraping</li>
+                </ul>
+                <p>Los datos de las revistas fueron obtenidos de:</p>
+                <ul>
+                    <li>SCImago Journal Rank (SJR)</li>
+                    <li>Catálogos institucionales de la UNISON</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

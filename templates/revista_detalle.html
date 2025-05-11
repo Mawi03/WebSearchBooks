@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}{{ titulo }} - UNISON{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Inicio</a></li>
+                <li class="breadcrumb-item active">{{ titulo }}</li>
+            </ol>
+        </nav>
+
+        <h1 class="mb-4">{{ titulo }}</h1>
+
+        <div class="row">
+            <!-- Información de Scimagojr -->
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Información de SCImago Journal Rank</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if scimagojr %}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>H-Index:</strong> {{ scimagojr.get('h_index', 'N/A') }}</p>
+                                <p><strong>Editorial:</strong> {{ scimagojr.get('publisher', 'N/A') }}</p>
+                                <p><strong>ISSN:</strong> {{ scimagojr.get('issn', 'N/A') }}</p>
+                                <p><strong>Tipo de Publicación:</strong> {{ scimagojr.get('publication_type', 'N/A') }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                {% if scimagojr.get('site') %}
+                                <p>
+                                    <strong>Sitio Web:</strong>
+                                    <a href="{{ scimagojr['site'] }}" target="_blank" rel="noopener">
+                                        Visitar sitio web
+                                    </a>
+                                </p>
+                                {% endif %}
+                                {% if scimagojr.get('url') %}
+                                <p>
+                                    <strong>Perfil SCImago:</strong>
+                                    <a href="{{ scimagojr['url'] }}" target="_blank" rel="noopener">
+                                        Ver en SCImago
+                                    </a>
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        {% if scimagojr.get('widget') %}
+                        <div class="mt-4">
+                            <img src="{{ scimagojr['widget'] }}" alt="SCImago Journal Rank" class="img-fluid">
+                        </div>
+                        {% endif %}
+
+                        {% if scimagojr.get('subject_area_category') %}
+                        <div class="mt-4">
+                            <strong>Categorías y Áreas Temáticas:</strong>
+                            <p>{{ scimagojr['subject_area_category'] }}</p>
+                        </div>
+                        {% endif %}
+
+                        {% else %}
+                        <p class="text-muted">No se encontró información en SCImago para esta revista.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información de Catálogos y Áreas -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Catálogos</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if revista.get('catalogos') %}
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for catalogo in revista['catalogos'] %}
+                            <a href="{{ url_for('catalogo_detalle', catalogo=catalogo) }}" 
+                               class="badge bg-secondary text-decoration-none">
+                                {{ catalogo }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No se encontraron catálogos.</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title mb-0">Áreas</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if revista.get('areas') %}
+                        <div class="d-flex flex-wrap gap-2">
+                            {% for area in revista['areas'] %}
+                            <a href="{{ url_for('area_detalle', area=area) }}" 
+                               class="badge bg-secondary text-decoration-none">
+                                {{ area }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <p class="text-muted">No se encontraron áreas.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Busqueda - UNISON{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="mb-4">Resultados de Busqueda</h1>
+        
+        <form action="{{ url_for('buscar') }}" method="get" class="search-bar">
+            <div class="input-group">
+                <input type="search" name="q" class="form-control" 
+                       placeholder="Buscar revistas..." 
+                       value="{{ request.args.get('q', '') }}">
+                <button class="btn btn-primary" type="submit">Buscar</button>
+            </div>
+        </form>
+        
+        {% if request.args.get('q') %}
+            {% if revistas %}
+            <div class="table-responsive">
+                <table class="table table-striped" id="revistasTable">
+                    <thead>
+                        <tr>
+                            <th>Titulo de la Revista</th>
+                            <th>H-Index</th>
+                            <th>Catalogos</th>
+                            <th>Areas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for titulo, info in revistas.items() %}
+                        <tr>
+                            <td>
+                                <a href="{{ url_for('revista_detalle', titulo=titulo) }}">{{ titulo }}</a>
+                            </td>
+                            <td>
+                                {{ scimagojr.get(titulo, {}).get('h_index', 'N/A') }}
+                            </td>
+                            <td>
+                                {% for catalogo in info['catalogos'] %}
+                                <a href="{{ url_for('catalogo_detalle', catalogo=catalogo) }}" 
+                                   class="badge bg-secondary text-decoration-none me-1">
+                                    {{ catalogo }}
+                                </a>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                {% for area in info['areas'] %}
+                                <a href="{{ url_for('area_detalle', area=area) }}" 
+                                   class="badge bg-secondary text-decoration-none me-1">
+                                    {{ area }}
+                                </a>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                No se encontraron revistas que coincidan con "{{ request.args.get('q') }}".
+            </div>
+            {% endif %}
+        {% else %}
+        <div class="text-center">
+            <p class="lead">Ingresa términos de búsqueda para encontrar revistas.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{% if revistas %}
+<script>
+$(document).ready(function() {
+    $('#revistasTable').DataTable({
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json'
+        },
+        order: [[1, 'desc']], // Ordenar por H-Index descendente
+        pageLength: 25
+    });
+});
+</script>
+{% endif %}
+{% endblock %}
