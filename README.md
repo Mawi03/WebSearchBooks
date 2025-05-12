@@ -89,3 +89,4 @@ Se emplearon asistentes virtuales (ChatGPT, Copilot, DeepSeek) para:
 
 Proyecto academico realizado para la asignatura de Desarollo de Sistemas IV, en el marco del programa educativo de la Universidad de Sonora (Mexico).
 
+
